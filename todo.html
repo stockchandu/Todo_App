@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO-LIST</title>
+
+    <style>
+        body {
+            background-color: #EDEDED;
+        }
+
+        #div_1 {
+            width: 550px;
+            height: 50px;
+            margin: 10px auto;
+        }
+
+        #div_2 {
+            width: 530px;
+            margin: 10px 0 0 400px;
+        }
+
+        #head-line {
+            width: 550px;
+            margin: auto;
+            font-size: 20px;
+            text-align: center;
+            font-weight: 800px;
+        }
+
+        #todo {
+            height: 40px;
+            width: 430px;
+            outline: none;
+            border: 2px solid rgb(63, 53, 53);
+            font-size: 15px;
+
+        }
+
+        input::placeholder {
+            font-size: 20px;
+        }
+
+        button {
+            width: 100px;
+            height: 46px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #1A7BFF;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="head-line"><b>TODO-LIST</b></div>
+    <div id="div_1">
+        <input type="text" id="todo" placeholder=" ➕ Add a Task ">
+        <button id="clickMe">ADD</button>
+    </div>
+
+    <div id="div_2"></div>
+
+
+    <script>
+
+
+
+        var input_div = document.getElementById("div_2");
+
+        var count = 1
+
+        let main_btn = document.getElementById("clickMe")
+
+        let addlist = function () {
+            var box = document.getElementById("todo").value;
+            var new_div_1 = document.createElement('div');
+            var new_div_2 = document.createElement('div');
+            var btn_1 = document.createElement('div');
+            var btn_2 = document.createElement('div');
+
+            if (box == "") {
+                alert("please add task")
+            } else {
+                style_clr(box, new_div_1, new_div_2, btn_1, btn_2)
+            }
+        }
+
+        main_btn.addEventListener('click', addlist)
+       
+        function style_clr(box, new_div_1, new_div_2, btn_1, btn_2) {
+
+            //button style
+            btn_1.textContent = "Complete"
+            btn_2.textContent = "Delete"
+            btn_2.style.width = "70px"
+            btn_2.style.height = "20px"
+            btn_2.style.margin = "5px 0 0 5px"
+            btn_2.style.border = "1px solid grey"
+            btn_2.style.backgroundColor = "#DC2D2F"
+            btn_2.style.textAlign = "center"
+            btn_2.style.padding = "8px"
+            btn_2.style.color = "white"
+            btn_1.style.color = "white"
+            btn_1.style.width = "70px"
+            btn_1.style.height = "20px"
+            btn_1.style.margin = "5px 0 0 5px"
+            btn_1.style.border = "1px solid grey"
+            btn_1.style.backgroundColor = "#1081C5"
+            btn_1.style.textAlign = "center"
+            btn_1.style.padding = "8px"
+            btn_1.style.cursor = "pointer"
+            btn_2.style.cursor = "pointer"
+
+            //div style-2
+            new_div_2.style.width = "330px"
+            new_div_2.style.height = "30px"
+            new_div_2.style.marginRight = "5px"
+            new_div_2.style.backgroundColor = "white"
+            new_div_2.style.padding = "10px"
+            new_div_2.style.fontSize = "18px"
+
+
+            //div style-1
+            new_div_1.style.width = "550px"
+            new_div_1.style.display = "flex"
+            new_div_1.style.height = "50px"
+            new_div_1.style.color = "black"
+            new_div_1.style.border = "2px solid grey"
+
+
+            //adding element to their parents
+            new_div_1.append(new_div_2)
+            new_div_1.append(btn_1)
+            new_div_1.append(btn_2)
+            new_div_2.innerHTML = box 
+            input_div.appendChild(new_div_1)
+
+            //call to button
+            btn_1.addEventListener('click', click_me)
+            btn_2.addEventListener('click', del_rem)
+
+            count++;
+
+        }
+
+
+        var click_me = function () {
+            var parent = event.target.previousSibling;
+            parent.style.textDecoration = "line-through";
+            parent.style.backgroundColor = "green";
+            parent.style.color = "white";
+        }
+
+        var del_rem = function () {
+            var parent = event.target.parentNode;
+            alert("are you sure to delete")
+            parent.remove();
+        }
+    </script>
+</body>
+
+</html>
